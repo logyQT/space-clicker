@@ -118,7 +118,7 @@ body {
 .rocket-button {
   width: 100%;
   height: 100%;
-  background: center no-repeat url("/images/default_spaceship_low_res.png");
+  background: center no-repeat url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_spaceship_low_res.png");
   background-size: 90%;
 }
 .rocket-button:active {
