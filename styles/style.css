@@ -1,0 +1,170 @@
+:root {
+  --bg: black;
+  --bgh: #111;
+  --fc: white;
+}
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+button {
+  border: none;
+  outline: none;
+}
+button:active {
+  border: none;
+  outline: none;
+}
+html {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+}
+body {
+  height: 96%;
+  width: 96%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--fc);
+}
+body {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 10% 90%;
+  grid-template-areas:
+    "section1 section3"
+    "section2 section4";
+  outline: 1px var(--fc) solid;
+  outline-offset: -1px;
+  border-radius: 5px;
+}
+.section1 {
+  grid-area: section1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  place-items: center;
+  gap: 0px 0px;
+  box-shadow: inset -1px -1px 0px 0px var(--fc);
+}
+.section1 > h4 {
+  width: 33.333%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  box-shadow: inset -1px 0px 0px 0px var(--fc);
+}
+.section2 {
+  grid-area: section2;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  box-shadow: inset -1px 0px 0px 0px var(--fc);
+}
+.section3 {
+  grid-area: section3;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 33.34% 33.33% 33.34%;
+  grid-template-rows: 100%;
+  gap: 0px 0px;
+  grid-template-areas: ". . .";
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+}
+.section4 {
+  grid-area: section4;
+}
+.money {
+  grid-area: money;
+}
+.distance {
+  grid-area: distance;
+}
+.upgrades-button {
+  box-shadow: inset -1px -1px 0px 0px var(--fc);
+}
+.options-button {
+  box-shadow: inset -1px -1px 0px 0px var(--fc);
+}
+.story-button {
+  box-shadow: inset 0px -1px 0px 0px var(--fc);
+}
+.upgrades-button,
+.options-button,
+.story-button {
+  background-color: var(--bg);
+  color: var(--fc);
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+}
+.upgrades-button:hover,
+.options-button:hover,
+.story-button:hover {
+  background-color: var(--bgh);
+}
+/*.section2 {
+  background: center no-repeat url("/images/background.gif");
+  background-size: 1000%;
+}*/
+.rocket-button {
+  width: 100%;
+  height: 100%;
+  background: center no-repeat url("/images/default_spaceship_low_res.png");
+  background-size: 90%;
+}
+.rocket-button:active {
+  background-size: 91.5%;
+}
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.hidden {
+  display: none;
+}
+.upgrade {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 50px;
+  grid-template-areas: ". . . .";
+  transition: 0.5s;
+}
+.upgrade:hover {
+  background-color: var(--bgh);
+}
+.upgrade > p {
+  padding: 6px;
+  box-shadow: inset -1px -1px 0px 0px var(--fc);
+  display: flex;
+  justify-content: start;
+  place-items: center;
+}
+.options-page {
+  display: grid;
+  grid-template-rows: 100px;
+  grid-template-areas: ". .";
+}
+.options-page > button {
+  background-color: var(--bg);
+  color: var(--fc);
+  padding: 8px;
+  box-shadow: inset -1px -1px 0px 0px var(--fc);
+  transition: 0.5s;
+}
+.options-page > button:hover {
+  background-color: var(--bgh);
+}
