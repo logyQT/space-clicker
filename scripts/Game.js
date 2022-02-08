@@ -1,43 +1,20 @@
 const Save = window.localStorage;
 class Game {
-  constructor(distanceElement, moneyElement, speedElement) {
-    this.distanceElement = distanceElement;
-    this.moneyElement = moneyElement;
-    this.speedElement = speedElement;
+  constructor() {
     this.buyAmmount = 1;
     this.init();
   }
 
   init() {
     if (Save.getItem("save")) {
+      Toast.show("Save loaded!");
       console.log("Found a valid save file! \nLoading save file!");
       this.player = JSON.parse(Save.getItem("player"));
       this.upgrades = JSON.parse(Save.getItem("upgrades"));
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
-      this.player = {
-        stage: 1,
-        money: 15,
-        ratio: 5,
-        distance: 0,
-        speed: 0,
-      };
-      this.upgrades = {
-        engine: {
-          name: "engine",
-          speed: 1,
-          cost: 10,
-          lvl: 0,
-          penatly: 0.1,
-        },
-        booster: {
-          name: "booster",
-          speed: 5,
-          cost: 100,
-          lvl: 0,
-          penatly: 0.1,
-        },
-      };
+      this.player = defaults.player;
+      this.upgrades = defaults.upgrades;
     }
     this.updateDisplay(true);
   }
@@ -47,15 +24,14 @@ class Game {
     let upgradeID = buttonID.split(" ")[0];
     this.upgrade = this.upgrades[upgradeID];
     let cost = this.upgrade.cost;
-    for (let i = 0; i < this.buyAmmount - 1; i++) {
-      cost += cost * this.upgrade.penatly;
-    }
+
     switch (this.player.money >= cost) {
       case true:
-        this.player.speed += this.upgrade.speed * this.buyAmmount;
-        this.player.money -= cost;
-        this.upgrade.cost += cost * this.upgrade.penatly;
-        this.upgrade.lvl += this.buyAmmount;
+        this.player.speed += this.upgrade.speed;
+        this.player.money -= this.upgrade.cost;
+        this.upgrade.cost += this.upgrade.cost * this.upgrade.penatly;
+        this.upgrade.lvl += 1;
+        Toast.show(`Bought ${this.upgrade.name} x1`);
         break;
       default:
         break;
@@ -94,9 +70,10 @@ class Game {
   }
 
   updateDisplay(upgrade = false) {
-    this.distanceElement.innerText = `Distance: ${Number(this.player.distance).toFixed(2)}`;
-    this.moneyElement.innerText = `Money: ${this.formatMoney(this.player.money, 2)}`;
-    this.speedElement.innerText = `Speed: ${Number(this.player.speed)}`;
+    let displayElements = document.getElementsByClassName("section1")[0].children;
+    displayElements[0].innerText = `Money: ${this.formatMoney(this.player.money, 2)}`;
+    displayElements[1].innerText = `Distance: ${this.player.distance}`;
+    displayElements[2].innerText = `Speed: ${this.player.speed}`;
     switch (upgrade) {
       case false:
         break;
@@ -106,10 +83,10 @@ class Game {
         });
         break;
       default:
-        let elements = document.getElementsByClassName(upgrade.name)[0].children;
-        elements[1].innerText = `Level: ${upgrade.lvl}`;
-        elements[2].innerText = `Cost: ${this.formatMoney(upgrade.cost, 2)}`;
-        elements[3].innerText = `Speed: ${upgrade.speed}`;
+        let upgradeElements = document.getElementsByClassName(upgrade.name)[0].children;
+        upgradeElements[1].innerText = `Level: ${upgrade.lvl}`;
+        upgradeElements[2].innerText = `Cost: ${this.formatMoney(upgrade.cost, 2)}`;
+        upgradeElements[3].innerText = `Speed: ${upgrade.speed}`;
         break;
     }
   }
@@ -122,6 +99,7 @@ class Game {
 
   restart() {
     Save.clear();
+    Toast.show("Let's start from scratch");
     this.init();
     console.log("Save cleared!");
   }
@@ -130,6 +108,7 @@ class Game {
     Save.setItem("save", true);
     Save.setItem("player", JSON.stringify(this.player));
     Save.setItem("upgrades", JSON.stringify(this.upgrades));
+    Toast.show("Saved the game!");
     console.log("Saved the game!");
   }
 

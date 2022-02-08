@@ -1,6 +1,3 @@
-const moneyElement = document.getElementsByClassName("money")[0];
-const distanceElement = document.getElementsByClassName("distance")[0];
-const speedElement = document.getElementsByClassName("speed")[0];
 const rocket = document.getElementsByClassName("rocket-button")[0];
 
 const pages = document.getElementsByClassName("section4")[0].children;
@@ -9,7 +6,7 @@ const upgradeButtons = document.getElementsByClassName("upgrades-page")[0].child
 const saveButton = document.getElementsByClassName("save-button")[0];
 const restartButton = document.getElementsByClassName("restart-button")[0];
 
-const game = new Game(distanceElement, moneyElement, speedElement);
+const game = new Game();
 
 // Increment the numbers when rocket is clicked
 rocket.addEventListener("click", () => {
@@ -26,6 +23,7 @@ for (let i = 0; i < pageSwitchButtons.length; i++) {
   });
 }
 
+// Upgrade buttons
 for (let i = 0; i < upgradeButtons.length; i++) {
   upgradeButtons[i].addEventListener("click", () => {
     game.buyUpgrade(upgradeButtons[i]);
