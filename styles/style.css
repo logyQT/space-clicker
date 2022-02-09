@@ -187,7 +187,11 @@ body {
 }
 .options-page > button:hover {
   background-color: var(--bgh);
-}
+} /*
+.backgroundVideo {
+  position: fixed;
+  
+}*/
 @media (orientation: portrait) {
   body {
     font-size: medium;
