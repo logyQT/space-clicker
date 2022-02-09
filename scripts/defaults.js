@@ -1,7 +1,7 @@
 const defaults = {
   player: {
     stage: 1,
-    money: 15,
+    money: 100,
     ratio: 10,
     distance: 0,
     speed: 0,
