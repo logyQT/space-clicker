@@ -42,3 +42,7 @@ saveButton.addEventListener("click", () => {
 restartButton.addEventListener("click", () => {
   game.restart();
 });
+
+setInterval(() => {
+  game.save();
+}, 60000);

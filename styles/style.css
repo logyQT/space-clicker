@@ -114,8 +114,9 @@ body {
   background-color: var(--bgh);
 }
 /*.section2 {
-  background: center no-repeat url("/images/background.gif");
-  background-size: 1000%;
+  background: center no-repeat url("https://github.com/logyQT/space-clicker/blob/main/images/background.gif?raw=true");
+  background-size: 100%;
+  background-repeat: repeat-y;
 }*/
 .rocket-button {
   width: 100%;
