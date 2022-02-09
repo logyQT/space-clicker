@@ -42,8 +42,3 @@ saveButton.addEventListener("click", () => {
 restartButton.addEventListener("click", () => {
   game.restart();
 });
-
-if (upgradesPage.clientHeight > section4.clientHeight) {
-  upgradesPage.children[upgradesPage.children.length - 1].children[0].style.boxShadow = "1px 0px 0px 0px var(--fc)";
-  upgradesPage.children[upgradesPage.children.length - 1].children[3].style.boxShadow = "1px 0px 0px 0px var(--fc)";
-}

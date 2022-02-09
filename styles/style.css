@@ -40,7 +40,6 @@ body {
     "section2 section4";
   outline: 1px var(--fc) solid;
   outline-offset: -1px;
-  border-radius: 5px;
 }
 .section1 {
   grid-area: section1;
@@ -139,7 +138,10 @@ body {
 }
 .section4 {
   max-height: 100%;
-  overflow: auto;
+  overflow: scroll;
+}
+.section4::-webkit-scrollbar {
+  display: none;
 }
 .upgrade {
   width: 100%;
@@ -155,13 +157,10 @@ body {
 }
 .upgrade > p {
   padding: 6px;
-  box-shadow: inset -1px -1px 0px 0px var(--fc);
+  box-shadow: inset -1px -1px 0px 0px var(--fc), inset 1px -1px 0px 0px var(--fc);
   display: flex;
   justify-content: start;
   place-items: center;
-}
-.upgrade > p:last-of-type {
-  box-shadow: inset 0px -1px 0px 0px var(--fc);
 }
 .options-page {
   display: grid;
@@ -191,7 +190,6 @@ body {
       "section4";
     outline: 1px var(--fc) solid;
     outline-offset: -1px;
-    border-radius: 5px;
   }
   .upgrades-button {
     box-shadow: inset -1px -1px 0px 0px var(--fc), inset 0px 1px 0px 0px var(--fc);
@@ -206,6 +204,6 @@ body {
     box-shadow: inset 0px -1px 0px 0px var(--fc);
   }
   button {
-    font-size: 1.5em;
+    font-size: 1.2rem;
   }
 }
