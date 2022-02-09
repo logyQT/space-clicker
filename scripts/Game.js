@@ -7,14 +7,48 @@ class Game {
 
   init() {
     if (Save.getItem("save")) {
-      Toast.show("Save loaded!");
-      console.log("Found a valid save file! \nLoading save file!");
-      this.player = JSON.parse(Save.getItem("player"));
-      this.upgrades = JSON.parse(Save.getItem("upgrades"));
+      let game = JSON.parse(Save.getItem("game"));
+      if (game?.version != defaults.version) {
+        let savedUpgrades = Object.keys(game.upgrades);
+        let defaultUpgrades = Object.keys(defaults.upgrades);
+        let missingUpgrades = defaultUpgrades.filter((item) => !savedUpgrades.includes(item));
+        let removedUpgrades = savedUpgrades.filter((item) => !defaultUpgrades.includes(item));
+
+        let savedPlayerProperties = Object.keys(game.player);
+        let defaultPlayerProperties = Object.keys(defaults.player);
+        let missingPlayerProperties = defaultPlayerProperties.filter((item) => !savedPlayerProperties.includes(item));
+        let removedPlayerProperties = savedPlayerProperties.filter((item) => !defaultPlayerProperties.includes(item));
+        console.log(missingUpgrades, removedUpgrades, missingPlayerProperties, removedPlayerProperties);
+
+        this.player = game.player;
+        this.upgrades = game.upgrades;
+
+        missingUpgrades.forEach((u) => {
+          this.upgrades[u] = defaults.upgrades[u];
+        });
+        removedUpgrades.forEach((u) => {
+          delete this.upgrades[u];
+        });
+        missingPlayerProperties.forEach((p) => {
+          this.player[p] = defaults.player[p];
+        });
+        removedPlayerProperties.forEach((p) => {
+          delete this.player[p];
+        });
+
+        this.version = defaults.version;
+        Toast.show("Save successfully updated!");
+      } else {
+        this.player = game.player;
+        this.upgrades = game.upgrades;
+        Toast.show("Save loaded!");
+        console.log("Found a valid save file! \nLoading save file!");
+      }
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
+      this.version = defaults.version;
     }
     this.updateDisplay(true);
   }
@@ -106,8 +140,7 @@ class Game {
 
   save() {
     Save.setItem("save", true);
-    Save.setItem("player", JSON.stringify(this.player));
-    Save.setItem("upgrades", JSON.stringify(this.upgrades));
+    Save.setItem("game", JSON.stringify(this));
     Toast.show("Saved the game!");
     console.log("Saved the game!");
   }
