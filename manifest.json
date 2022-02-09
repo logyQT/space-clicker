@@ -4,5 +4,12 @@
   "description": "A space themed clicker game",
   "display": "fullscreen",
   "orientation": "portrait",
-  "start_url": "/space-clicker/"
+  "start_url": "/space-clicker/",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/icon_spaceship.png",
+      "type": "image/png",
+      "size": "512x512"
+    }
+  ]
 }
