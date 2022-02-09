@@ -21,3 +21,10 @@
   opacity: 1;
   visibility: visible;
 }
+@media (max-width: 700px) {
+  .toast {
+    left: 0;
+    right: 0;
+    width: 50%;
+  }
+}

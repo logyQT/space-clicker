@@ -168,3 +168,27 @@ body {
 .options-page > button:hover {
   background-color: var(--bgh);
 }
+@media (max-width: 700px) {
+  body {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 50% 10% 30%;
+    grid-template-areas:
+      "section1"
+      "section2"
+      "section3"
+      "section4";
+    outline: 1px var(--fc) solid;
+    outline-offset: -1px;
+    border-radius: 5px;
+  }
+  .upgrades-button {
+    box-shadow: inset -1px -1px 0px 0px var(--fc), inset 0px 1px 0px 0px var(--fc);
+  }
+  .options-button {
+    box-shadow: inset -1px -1px 0px 0px var(--fc), inset 0px 1px 0px 0px var(--fc);
+  }
+  .story-button {
+    box-shadow: inset 0px -1px 0px 0px var(--fc), inset 0px 1px 0px 0px var(--fc);
+  }
+}
