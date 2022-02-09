@@ -4,5 +4,5 @@
   "description": "A space themed clicker game",
   "display": "fullscreen",
   "orientation": "portrait",
-  "start_url": "/space-clicker"
+  "start_url": "/space-clicker/"
 }
