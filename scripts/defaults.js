@@ -28,5 +28,19 @@ const defaults = {
       lvl: 0,
       penatly: 0.1,
     },
+    hull: {
+      name: "hull",
+      speed: 1000,
+      cost: 10000,
+      lvl: 0,
+      penatly: 0.1,
+    },
+    fins: {
+      name: "fins",
+      speed: 10000,
+      cost: 100000,
+      lvl: 0,
+      penatly: 0.1,
+    },
   },
 };

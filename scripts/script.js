@@ -6,6 +6,9 @@ const upgradeButtons = document.getElementsByClassName("upgrades-page")[0].child
 const saveButton = document.getElementsByClassName("save-button")[0];
 const restartButton = document.getElementsByClassName("restart-button")[0];
 
+const section4 = document.getElementsByClassName("section4")[0];
+const upgradesPage = document.getElementsByClassName("upgrades-page")[0];
+
 const game = new Game();
 
 // Increment the numbers when rocket is clicked
@@ -39,3 +42,8 @@ saveButton.addEventListener("click", () => {
 restartButton.addEventListener("click", () => {
   game.restart();
 });
+
+if (upgradesPage.clientHeight > section4.clientHeight) {
+  upgradesPage.children[upgradesPage.children.length - 1].children[0].style.boxShadow = "1px 0px 0px 0px var(--fc)";
+  upgradesPage.children[upgradesPage.children.length - 1].children[3].style.boxShadow = "1px 0px 0px 0px var(--fc)";
+}
