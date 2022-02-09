@@ -105,9 +105,16 @@ class Game {
 
   updateDisplay(upgrade = false) {
     let displayElements = document.getElementsByClassName("section1")[0].children;
-    displayElements[0].innerText = `Money: ${this.formatMoney(this.player.money, 2)}`;
-    displayElements[1].innerText = `Distance: ${this.player.distance}`;
-    displayElements[2].innerText = `Speed: ${this.player.speed}`;
+
+    displayElements[0].innerText = `Money 
+    ${this.formatMoney(this.player.money, 2)}`;
+
+    displayElements[1].innerText = `Distance
+    ${this.player.distance}`;
+
+    displayElements[2].innerText = `Speed
+    ${this.player.speed}`;
+
     switch (upgrade) {
       case false:
         break;
@@ -118,9 +125,12 @@ class Game {
         break;
       default:
         let upgradeElements = document.getElementsByClassName(upgrade.name)[0].children;
-        upgradeElements[1].innerText = `Level: ${upgrade.lvl}`;
-        upgradeElements[2].innerText = `Cost: ${this.formatMoney(upgrade.cost, 2)}`;
-        upgradeElements[3].innerText = `Speed: ${upgrade.speed}`;
+        upgradeElements[1].innerText = `Level 
+        ${upgrade.lvl}`;
+        upgradeElements[2].innerText = `Cost
+        ${this.formatMoney(upgrade.cost, 2)}`;
+        upgradeElements[3].innerText = `Speed
+        ${upgrade.speed}`;
         break;
     }
   }

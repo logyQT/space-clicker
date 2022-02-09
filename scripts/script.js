@@ -12,9 +12,18 @@ const upgradesPage = document.getElementsByClassName("upgrades-page")[0];
 const game = new Game();
 
 // Increment the numbers when rocket is clicked
-rocket.addEventListener("click", () => {
-  game.move();
-});
+switch (screen.width < 700) {
+  case true:
+    rocket.addEventListener("touchstart", () => {
+      game.move();
+    });
+    break;
+  default:
+    rocket.addEventListener("click", () => {
+      game.move();
+    });
+    break;
+}
 
 // Page switching
 for (let i = 0; i < pageSwitchButtons.length; i++) {
