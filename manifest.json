@@ -1,0 +1,8 @@
+{
+  "short_name": "Space Clicker",
+  "name": "Space Clicker",
+  "description": "A space themed clicker game",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "start_url": "/"
+}
