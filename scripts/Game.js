@@ -11,6 +11,8 @@ class Game {
       this.player = game.player;
       this.upgrades = game.upgrades;
       Toast.show("Save loaded!");
+      console.log({ saved: game.timestamp, loaded: Date.now(), diffrence: Date.now() - game.timestamp });
+      this.move(10, (Date.now() - game.timestamp) / 1000);
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
       this.player = defaults.player;
@@ -43,6 +45,7 @@ class Game {
   }
 
   formatMoney(num, digits) {
+    let temp = num;
     const lookup = [
       { value: 1, symbol: "" },
       { value: 1e3, symbol: " k" },
@@ -69,13 +72,15 @@ class Game {
       .find(function (item) {
         return num >= item.value;
       });
-    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : temp.toFixed(digits);
   }
 
   formatDistance(num, digits) {
+    let temp = num;
     const lookup = [
       { value: 1, symbol: " m" },
       { value: 1e3, symbol: " km" },
+      { value: 1e6, symbol: " Mm" },
       { value: 2.998e8, symbol: " ls" },
       { value: 1.799e10, symbol: " lm" },
       { value: 1.079e12, symbol: " lh" },
@@ -99,7 +104,7 @@ class Game {
       .find(function (item) {
         return num >= item.value;
       });
-    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : temp.toFixed(digits);
   }
 
   capitalize(str) {
@@ -142,16 +147,21 @@ class Game {
     }
   }
 
-  move() {
-    this.player.distance += this.player.speed;
-    this.player.money += this.player.speed / this.player.ratio;
+  move(idle = 1, x = 1) {
+    this.player.distance += (this.player.speed / idle) * x;
+    this.player.money += (this.player.speed / this.player.ratio / idle) * x;
     this.updateDisplay();
+    switch (x != 1) {
+      case true: {
+        Toast.show(`While you were offline you gained ${this.formatMoney(this.player.speed / this.player.ratio / idle) * x}`);
+      }
+    }
   }
 
-  tick() {
-    this.player.distance += this.player.speed / 100;
-    this.player.money += this.player.speed / this.player.ratio / 100;
-    this.updateDisplay();
+  tick(t) {
+    setInterval(() => {
+      this.move(10, 1);
+    }, t);
   }
 
   restart() {
@@ -162,6 +172,7 @@ class Game {
   }
 
   save() {
+    this.timestamp = Date.now();
     Save.setItem("save", true);
     Save.setItem("game", JSON.stringify(this));
     Toast.show("Saved the game!");
