@@ -195,11 +195,43 @@ body {
   place-items: center;
   font-size: 1.5rem;
 }
+.save-button {
+  grid-area: save;
+}
+.restart-button {
+  grid-area: restart;
+}
+.import-button {
+  grid-area: import;
+}
+.export-button {
+  grid-area: export;
+}
+.import-export-area {
+  grid-area: iearea;
+  background-color: var(--bg);
+  color: var(--fc);
+  padding: 1%;
+  border: none;
+  outline: none;
+  resize: none;
+  text-decoration: none;
+}
+.import-export-area::-webkit-scrollbar {
+  display: none;
+}
+.import-export-area:hover,
+.import-export-area:focus {
+  background-color: var(--bgh);
+}
 .options-page {
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 100px;
-  grid-template-areas: ". .";
+  grid-template-rows: 100px 100px 300px;
+  grid-template-areas:
+    "save restart"
+    "import export"
+    "iearea iearea";
 }
 .options-page > h4 {
   background-color: var(--bg);

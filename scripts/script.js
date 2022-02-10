@@ -5,6 +5,8 @@ const pageSwitchButtons = document.getElementsByClassName("section3")[0].childre
 const upgradeButtons = document.getElementsByClassName("upgrades-page")[0].children;
 const saveButton = document.getElementsByClassName("save-button")[0];
 const restartButton = document.getElementsByClassName("restart-button")[0];
+const importButton = document.getElementsByClassName("import-button")[0];
+const exportButton = document.getElementsByClassName("export-button")[0];
 
 const section4 = document.getElementsByClassName("section4")[0];
 const upgradesPage = document.getElementsByClassName("upgrades-page")[0];
@@ -52,6 +54,16 @@ saveButton.addEventListener("click", () => {
 // Restart button
 restartButton.addEventListener("click", () => {
   game.restart();
+});
+
+// Import button
+importButton.addEventListener("click", () => {
+  game.import();
+});
+
+// Export button
+exportButton.addEventListener("click", () => {
+  game.export();
 });
 
 // Game loop

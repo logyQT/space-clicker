@@ -153,8 +153,12 @@ class Game {
     this.updateDisplay();
     switch (x != 1) {
       case true: {
-        console.log(this.formatMoney(this.player.speed / this.player.ratio / idle) * x);
-        Toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`);
+        console.log(this.player.speed / this.player.ratio / idle) * x;
+        Toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`, 10000);
+        break;
+      }
+      default: {
+        break;
       }
     }
   }
@@ -178,5 +182,70 @@ class Game {
     Save.setItem("game", JSON.stringify(this));
     Toast.show("Saved the game!");
     console.log("Saved the game!");
+  }
+
+  export() {
+    let textarea = document.getElementsByClassName("import-export-area")[0];
+    this.save();
+    textarea.value = btoa(JSON.stringify(this));
+    textarea.focus();
+    textarea.select();
+  }
+
+  import() {
+    function __atob(obj) {
+      try {
+        atob(obj);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    function __json(obj) {
+      try {
+        JSON.parse(obj);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    let txv = document.getElementsByClassName("import-export-area")[0].value;
+
+    if (!__atob(txv)) {
+      return false;
+    }
+    if (!__json(atob(txv))) {
+      return false;
+    }
+
+    if (!this.validate(JSON.parse(atob(txv)))) {
+      return false;
+    }
+
+    let game = JSON.parse(atob(txv));
+    this.player = game.player;
+    this.upgrades = game.upgrades;
+    Toast.show("Save imported!");
+    this.updateDisplay();
+  }
+
+  validate(game) {
+    let savedUpgrades = Object.keys(game.upgrades);
+    let defaultUpgrades = Object.keys(defaults.upgrades);
+    let missingUpgrades = defaultUpgrades.filter((item) => !savedUpgrades.includes(item));
+    let removedUpgrades = savedUpgrades.filter((item) => !defaultUpgrades.includes(item));
+
+    let savedPlayerProperties = Object.keys(game.player);
+    let defaultPlayerProperties = Object.keys(defaults.player);
+    let missingPlayerProperties = defaultPlayerProperties.filter((item) => !savedPlayerProperties.includes(item));
+    let removedPlayerProperties = savedPlayerProperties.filter((item) => !defaultPlayerProperties.includes(item));
+
+    console.log(missingUpgrades, removedUpgrades, missingPlayerProperties, removedPlayerProperties);
+
+    if (missingUpgrades && removedUpgrades && savedPlayerProperties && removedPlayerProperties) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

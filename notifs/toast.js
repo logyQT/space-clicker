@@ -6,7 +6,7 @@ const Toast = {
     this.element.className = "toast";
     document.body.appendChild(this.element);
   },
-  show(message) {
+  show(message, timeout = 2000) {
     clearTimeout(this.hideTimeout);
 
     this.element.textContent = message;
@@ -14,7 +14,7 @@ const Toast = {
 
     this.hideTimeout = setTimeout(() => {
       this.element.classList.remove("toast-visible");
-    }, 2000);
+    }, timeout);
   },
 };
 
