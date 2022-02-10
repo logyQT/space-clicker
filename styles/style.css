@@ -4,8 +4,8 @@
   --fc: white;
 }
 @font-face {
-  font-family: Astro;
-  src: url("ASTRO.ttf");
+  font-family: Avant;
+  src: url("ITCAvantGardePro-Bold.ttf");
 }
 * {
   margin: 0;
@@ -31,7 +31,8 @@ body {
   justify-content: center;
   place-items: center;
   background: #000;
-  font-family: Astro;
+  font-family: Avant;
+  overflow: hidden;
 }
 .container {
   height: 100%;
@@ -215,12 +216,23 @@ body {
 .options-page > button:hover {
   background-color: var(--bgh);
 }
-.backgroundVideo {
+.background {
   position: fixed;
+  height: 400%;
+  width: 100%;
   right: 0;
   bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
+  animation: background 5s linear infinite;
+  background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background.jpg");
+  background-size: 100% 50%;
+}
+@keyframes background {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% -100%;
+  }
 }
 @media (orientation: portrait) {
   .container {
@@ -239,5 +251,9 @@ body {
   }
   .rocket-button {
     animation-duration: 2s;
+  }
+  .background {
+    height: 200%;
+    background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background_mobile.jpg");
   }
 }
