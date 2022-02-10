@@ -43,5 +43,4 @@ const defaults = {
       penatly: 0.1,
     },
   },
-  version: "1",
 };

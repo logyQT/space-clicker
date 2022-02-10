@@ -8,23 +8,12 @@ class Game {
   init() {
     if (Save.getItem("save")) {
       let game = JSON.parse(Save.getItem("game"));
-      if (game?.version != defaults.version) {
-        this.player = defaults.player;
-        this.upgrades = defaults.upgrades;
-        this.version = defaults.version;
-        Toast.show("Your save has been reset due to an update!");
-        this.save();
-      } else {
-        this.player = game.player;
-        this.upgrades = game.upgrades;
-        Toast.show("Save loaded!");
-        console.log("Found a valid save file! \nLoading save file!");
-      }
+      this.player = game.player;
+      this.upgrades = game.upgrades;
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
-      this.version = defaults.version;
     }
     this.updateDisplay(true);
   }
@@ -34,21 +23,19 @@ class Game {
     let upgradeID = buttonID.split(" ")[0];
     this.upgrade = this.upgrades[upgradeID];
     let cost = this.upgrade.cost;
-    for (let i = 0; i < this.buyAmmount; i++) {
+    for (let i = 0; i < this.buyAmmount - 1; i++) {
       cost += cost * this.upgrade.penatly;
     }
-    console.log(cost);
-
     switch (this.player.money >= cost) {
       case true:
-        this.player.speed += this.upgrade.speed;
-        this.player.money -= this.upgrade.cost;
-        this.upgrade.cost += this.upgrade.cost * this.upgrade.penatly;
+        this.player.speed += this.upgrade.speed * this.buyAmmount;
+        this.player.money -= cost;
+        this.upgrade.cost += cost * this.upgrade.penatly;
         this.upgrade.lvl += 1 * this.buyAmmount;
         Toast.show(`Bought ${this.upgrade.name} x1`);
         break;
       default:
-        Toast.show(`Not enough money to buy ${this.upgrade.name} x1`);
+        Toast.show(`Not enough money to buy ${this.upgrade.name} x${this.buyAmmount}`);
         break;
     }
     this.updateDisplay(this.upgrade);
@@ -153,7 +140,8 @@ class Game {
   }
 
   tick() {
-    this.player.distance += this.player.speed / 10;
+    this.player.distance += this.player.speed / 100;
+    this.player.money += this.player.speed / this.player.ratio / 100;
     this.updateDisplay();
   }
 
