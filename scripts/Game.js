@@ -13,7 +13,7 @@ class Game {
         this.upgrades = defaults.upgrades;
         this.version = defaults.version;
         Toast.show("Your save has been reset due to an update!");
-        game.save();
+        this.save();
       } else {
         this.player = game.player;
         this.upgrades = game.upgrades;

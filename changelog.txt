@@ -1,2 +1,0 @@
-- redesigned entire app
-- added a moving background to the rocket
