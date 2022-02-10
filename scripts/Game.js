@@ -25,7 +25,6 @@ class Game {
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
       this.version = defaults.version;
-      game.save();
     }
     this.updateDisplay(true);
   }
@@ -35,13 +34,17 @@ class Game {
     let upgradeID = buttonID.split(" ")[0];
     this.upgrade = this.upgrades[upgradeID];
     let cost = this.upgrade.cost;
+    for (let i = 0; i < this.buyAmmount; i++) {
+      cost += cost * this.upgrade.penatly;
+    }
+    console.log(cost);
 
     switch (this.player.money >= cost) {
       case true:
         this.player.speed += this.upgrade.speed;
         this.player.money -= this.upgrade.cost;
         this.upgrade.cost += this.upgrade.cost * this.upgrade.penatly;
-        this.upgrade.lvl += 1;
+        this.upgrade.lvl += 1 * this.buyAmmount;
         Toast.show(`Bought ${this.upgrade.name} x1`);
         break;
       default:
