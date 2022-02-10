@@ -1,6 +1,6 @@
 :root {
   --bg: rgba(0, 0, 0, 0);
-  --bgh: rgba(0, 0, 0, 0.5);
+  --bgh: rgba(0, 0, 0, 0.3);
   --fc: white;
 }
 .noselect {
@@ -41,7 +41,7 @@ body {
   color: var(--fc);
   font-size: 1.2rem;
   position: fixed;
-  background: rgba(11, 11, 11, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 10% 90%;
@@ -70,7 +70,7 @@ body {
 }
 .section1 {
   margin: 1.2%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   grid-area: section1;
   display: flex;
@@ -87,7 +87,7 @@ body {
 }
 .section3 {
   margin: 1.2%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50px;
   grid-area: section3;
   display: grid;
@@ -116,7 +116,7 @@ body {
   grid-area: section4;
   margin: 1.2%;
   border-radius: 25px;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 .money {
   grid-area: money;
@@ -140,6 +140,7 @@ body {
   background: center no-repeat url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_spaceship_low_res.png");
   background-size: cover;
   animation: rocket 1.5s linear 0s infinite alternate;
+  filter: brightness(80%);
 }
 @keyframes rocket {
   0% {
@@ -216,8 +217,8 @@ body {
   right: 0;
   bottom: 0;
   animation: background 7s linear infinite;
-  background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background.jpg");
-  background-repeat: repeat-y;
+  background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.jpg");
+  background-repeat: repeat;
   transform: translate3d(0, 0, 0);
 }
 @keyframes background {
@@ -225,7 +226,7 @@ body {
     transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translate3d(0, 2000px, 0);
+    transform: translate3d(0, 1000px, 0);
   }
 }
 @media (orientation: portrait) {
@@ -241,12 +242,12 @@ body {
       "section4";
   }
   .section1 > h4 {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+  .section3 > h4 {
+    font-size: 1.2rem;
   }
   .rocket-button {
     animation-duration: 2s;
-  }
-  .background {
-    background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background_mobile.jpg");
   }
 }
