@@ -17,31 +17,16 @@ switch (screen.width < 700) {
     rocket.addEventListener("touchstart", () => {
       game.move();
     });
-    /*let video = document.getElementsByClassName("backgroundVideo")[0];
-    let source = document.createElement("source");
-
-    source.setAttribute("src", "https://logyqt.github.io/space-clicker/images/background_mobile.mp4");
-    source.setAttribute("type", "video/mp4");
-
-    video.appendChild(source);
-    video.play();*/
     break;
   }
   default: {
     rocket.addEventListener("click", () => {
       game.move();
     });
-    /*let video = document.getElementsByClassName("backgroundVideo")[0];
-    let source = document.createElement("source");
-
-    source.setAttribute("src", "https://logyqt.github.io/space-clicker/images/background2.mp4");
-    source.setAttribute("type", "video/mp4");
-
-    video.appendChild(source);
-    video.play();*/
     break;
   }
 }
+
 // Page switching
 for (let i = 0; i < pageSwitchButtons.length; i++) {
   pageSwitchButtons[i].addEventListener("click", () => {
@@ -59,20 +44,22 @@ for (let i = 0; i < upgradeButtons.length; i++) {
   });
 }
 
-//Save button
+// Save button
 saveButton.addEventListener("click", () => {
   game.save();
 });
 
-//Restart button
+// Restart button
 restartButton.addEventListener("click", () => {
   game.restart();
 });
 
+// Game loop
 setInterval(() => {
   game.tick();
 }, 100);
 
+// Autosave
 setInterval(() => {
   game.save();
 }, 30000);

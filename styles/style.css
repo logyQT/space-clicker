@@ -201,14 +201,19 @@ body {
   grid-template-rows: 100px;
   grid-template-areas: ". .";
 }
-.options-page > button {
+.options-page > h4 {
   background-color: var(--bg);
   color: var(--fc);
-  padding: 8px;
+  display: flex;
+  justify-content: center;
+  place-items: center;
   transition: 0.5s;
 }
-.options-page > button:hover {
+.options-page > h4:hover {
   background-color: var(--bgh);
+}
+.story-page {
+  padding: 20px;
 }
 .background {
   position: absolute;
@@ -242,10 +247,13 @@ body {
       "section4";
   }
   .section1 > h4 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
   .section3 > h4 {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+  .upgrade > p {
+    font-size: 1.3rem;
   }
   .rocket-button {
     animation-duration: 2s;

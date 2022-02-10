@@ -10,6 +10,7 @@ class Game {
       let game = JSON.parse(Save.getItem("game"));
       this.player = game.player;
       this.upgrades = game.upgrades;
+      Toast.show("Save loaded!");
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
       this.player = defaults.player;
@@ -109,13 +110,13 @@ class Game {
     let displayElements = document.getElementsByClassName("section1")[0].children;
 
     displayElements[0].innerText = `Money 
-    ${this.formatMoney(this.player.money, 2)}`;
+    ${this.formatMoney(this.player.money, 1)}`;
 
     displayElements[1].innerText = `Distance
-    ${this.formatDistance(this.player.distance, 2)}`;
+    ${this.formatDistance(this.player.distance, 1)}`;
 
     displayElements[2].innerText = `Speed
-    ${this.formatDistance(this.player.speed, 2)}`;
+    ${this.formatDistance(this.player.speed, 1)}`;
 
     switch (upgrade) {
       case false:
@@ -133,10 +134,10 @@ class Game {
         ${upgrade.lvl}`;
 
         upgradeElements[2].innerText = `Cost
-        ${this.formatMoney(upgrade.cost, 2)}`;
+        ${this.formatMoney(upgrade.cost, 1)}`;
 
         upgradeElements[3].innerText = `Speed
-        ${this.formatDistance(upgrade.speed, 2)}`;
+        ${this.formatDistance(upgrade.speed, 1)}`;
         break;
     }
   }
