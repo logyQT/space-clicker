@@ -153,7 +153,8 @@ class Game {
     this.updateDisplay();
     switch (x != 1) {
       case true: {
-        Toast.show(`While you were offline you gained ${this.formatMoney(this.player.speed / this.player.ratio / idle) * x}`);
+        console.log(this.formatMoney(this.player.speed / this.player.ratio / idle) * x);
+        Toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`);
       }
     }
   }
