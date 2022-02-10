@@ -5,6 +5,8 @@
   "display": "fullscreen",
   "orientation": "portrait",
   "start_url": "/space-clicker/",
+  "theme_color": "#000000",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/icon_spaceship.png",
