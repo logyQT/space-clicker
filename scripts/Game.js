@@ -9,35 +9,11 @@ class Game {
     if (Save.getItem("save")) {
       let game = JSON.parse(Save.getItem("game"));
       if (game?.version != defaults.version) {
-        let savedUpgrades = Object.keys(game.upgrades);
-        let defaultUpgrades = Object.keys(defaults.upgrades);
-        let missingUpgrades = defaultUpgrades.filter((item) => !savedUpgrades.includes(item));
-        let removedUpgrades = savedUpgrades.filter((item) => !defaultUpgrades.includes(item));
-
-        let savedPlayerProperties = Object.keys(game.player);
-        let defaultPlayerProperties = Object.keys(defaults.player);
-        let missingPlayerProperties = defaultPlayerProperties.filter((item) => !savedPlayerProperties.includes(item));
-        let removedPlayerProperties = savedPlayerProperties.filter((item) => !defaultPlayerProperties.includes(item));
-        console.log(missingUpgrades, removedUpgrades, missingPlayerProperties, removedPlayerProperties);
-
-        this.player = game.player;
-        this.upgrades = game.upgrades;
-
-        missingUpgrades.forEach((u) => {
-          this.upgrades[u] = defaults.upgrades[u];
-        });
-        removedUpgrades.forEach((u) => {
-          delete this.upgrades[u];
-        });
-        missingPlayerProperties.forEach((p) => {
-          this.player[p] = defaults.player[p];
-        });
-        removedPlayerProperties.forEach((p) => {
-          delete this.player[p];
-        });
-
+        this.player = defaults.player;
+        this.upgrades = defaults.upgrades;
         this.version = defaults.version;
-        Toast.show("Save successfully updated!");
+        Toast.show("Your save has been reset due to an update!");
+        game.save();
       } else {
         this.player = game.player;
         this.upgrades = game.upgrades;
@@ -49,6 +25,7 @@ class Game {
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
       this.version = defaults.version;
+      game.save();
     }
     this.updateDisplay(true);
   }
@@ -68,7 +45,7 @@ class Game {
         Toast.show(`Bought ${this.upgrade.name} x1`);
         break;
       default:
-        Toast.show(`Not enoguht money to buy ${this.upgrade.name} x1`);
+        Toast.show(`Not enough money to buy ${this.upgrade.name} x1`);
         break;
     }
     this.updateDisplay(this.upgrade);
@@ -104,6 +81,36 @@ class Game {
     return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
   }
 
+  formatDistance(num, digits) {
+    const lookup = [
+      { value: 1, symbol: " m" },
+      { value: 1e3, symbol: " km" },
+      { value: 2.998e8, symbol: " ls" },
+      { value: 1.799e10, symbol: " lm" },
+      { value: 1.079e12, symbol: " lh" },
+      { value: 2.59e13, symbol: " ld" },
+      { value: 1.813e14, symbol: " lw" },
+      { value: 9.461e15, symbol: " ly" },
+      { value: 3.086e16, symbol: " pc" },
+      { value: 3.086e22, symbol: " Mpc" },
+      { value: 3.086e25, symbol: " Gpc" },
+      { value: 3.086e28, symbol: " Tpc" },
+      { value: 3.086e31, symbol: " Ppc" },
+      { value: 3.086e34, symbol: " Epc" },
+      { value: 3.086e37, symbol: " Zpc" },
+      { value: 3.086e40, symbol: " Ypc" },
+    ];
+
+    const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var item = lookup
+      .slice()
+      .reverse()
+      .find(function (item) {
+        return num >= item.value;
+      });
+    return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
+  }
+
   updateDisplay(upgrade = false) {
     let displayElements = document.getElementsByClassName("section1")[0].children;
 
@@ -111,10 +118,10 @@ class Game {
     ${this.formatMoney(this.player.money, 2)}`;
 
     displayElements[1].innerText = `Distance
-    ${this.player.distance}`;
+    ${this.formatDistance(this.player.distance, 2)}`;
 
     displayElements[2].innerText = `Speed
-    ${this.player.speed}`;
+    ${this.formatDistance(this.player.speed, 2)}`;
 
     switch (upgrade) {
       case false:
@@ -131,7 +138,7 @@ class Game {
         upgradeElements[2].innerText = `Cost
         ${this.formatMoney(upgrade.cost, 2)}`;
         upgradeElements[3].innerText = `Speed
-        ${upgrade.speed}`;
+        ${this.formatDistance(upgrade.speed, 2)}`;
         break;
     }
   }
@@ -139,6 +146,11 @@ class Game {
   move() {
     this.player.distance += this.player.speed;
     this.player.money += this.player.speed / this.player.ratio;
+    this.updateDisplay();
+  }
+
+  tick() {
+    this.player.distance += this.player.speed / 10;
     this.updateDisplay();
   }
 
@@ -154,14 +166,5 @@ class Game {
     Save.setItem("game", JSON.stringify(this));
     Toast.show("Saved the game!");
     console.log("Saved the game!");
-  }
-
-  _buyAmmount(button, buttons) {
-    buttons.forEach((b) => {
-      b.className = "clickable";
-    });
-    button.className = "clickable selected";
-    this.buyAmmount = Number(button.innerText);
-    this.updateDisplay(true);
   }
 }

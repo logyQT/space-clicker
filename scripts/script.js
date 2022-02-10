@@ -53,5 +53,9 @@ restartButton.addEventListener("click", () => {
 });
 
 setInterval(() => {
+  game.tick();
+}, 100);
+
+setInterval(() => {
   game.save();
 }, 30000);
