@@ -68,6 +68,7 @@ class Game {
         Toast.show(`Bought ${this.upgrade.name} x1`);
         break;
       default:
+        Toast.show(`Not enoguht money to buy ${this.upgrade.name} x1`);
         break;
     }
     this.updateDisplay(this.upgrade);

@@ -1,6 +1,6 @@
 :root {
   --bg: rgba(0, 0, 0, 0.1);
-  --bgh: rgba(32, 32, 32, 0.1);
+  --bgh: rgba(0, 0, 0, 0.8);
   --fc: white;
 }
 * {
@@ -35,7 +35,7 @@ body {
   color: var(--fc);
   font-size: 1.2rem;
   position: fixed;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   display: grid;
   grid-template-columns: 50% 50%;
   grid-template-rows: 10% 90%;
