@@ -101,6 +101,10 @@ class Game {
     return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
   }
 
+  capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
   updateDisplay(upgrade = false) {
     let displayElements = document.getElementsByClassName("section1")[0].children;
 
@@ -123,10 +127,14 @@ class Game {
         break;
       default:
         let upgradeElements = document.getElementsByClassName(upgrade.name)[0].children;
+        upgradeElements[0].innerText = `${this.capitalize(upgrade.name)}
+        x${this.buyAmmount}`;
         upgradeElements[1].innerText = `Level 
         ${upgrade.lvl}`;
+
         upgradeElements[2].innerText = `Cost
         ${this.formatMoney(upgrade.cost, 2)}`;
+
         upgradeElements[3].innerText = `Speed
         ${this.formatDistance(upgrade.speed, 2)}`;
         break;

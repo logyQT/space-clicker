@@ -3,6 +3,13 @@
   --bgh: rgba(0, 0, 0, 0.5);
   --fc: white;
 }
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 @font-face {
   font-family: Avant;
   src: url("ITCAvantGardePro-Bold.ttf");
@@ -11,14 +18,6 @@
   margin: 0;
   padding: 0;
   border: none;
-}
-button {
-  border: none;
-  outline: none;
-}
-button:active {
-  border: none;
-  outline: none;
 }
 html {
   height: 100%;
@@ -164,13 +163,7 @@ body {
     background-size: 97%;
   }
 }
-.noselect {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+
 .hidden {
   display: none;
 }
@@ -217,21 +210,22 @@ body {
   background-color: var(--bgh);
 }
 .background {
-  position: fixed;
-  height: 400%;
+  position: absolute;
+  height: 10000px;
   width: 100%;
   right: 0;
   bottom: 0;
-  animation: background 5s linear infinite;
+  animation: background 7s linear infinite;
   background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background.jpg");
-  background-size: 100% 50%;
+  background-repeat: repeat-y;
+  transform: translate3d(0, 0, 0);
 }
 @keyframes background {
-  from {
-    background-position: 0% 0%;
+  0% {
+    transform: translate3d(0, 0, 0);
   }
-  to {
-    background-position: 0% -100%;
+  100% {
+    transform: translate3d(0, 2000px, 0);
   }
 }
 @media (orientation: portrait) {
@@ -253,7 +247,6 @@ body {
     animation-duration: 2s;
   }
   .background {
-    height: 200%;
     background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background_mobile.jpg");
   }
 }
