@@ -12,11 +12,13 @@ export default class Game {
       let game = JSON.parse(Save.getItem("game"));
       this.player = game.player;
       this.upgrades = game.upgrades;
+      this.autosaveDelay = game.autosaveDelay;
       toast.show("Save loaded!");
       console.log({ saved: game.timestamp, loaded: Date.now(), diffrence: Date.now() - game.timestamp });
       this.move(10, (Date.now() - game.timestamp) / 1000);
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
+      this.autosaveDelay = defaults.autosaveDelay;
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
     }
@@ -184,6 +186,24 @@ export default class Game {
     Save.setItem("game", JSON.stringify(this));
     toast.show("Saved the game!");
     console.log("Saved the game!");
+  }
+
+  autosave() {
+    console.log(this.autosaveDelay);
+    setInterval(() => {
+      this.save();
+    }, this.autosaveDelay);
+  }
+
+  autosaveSetting(button) {
+    let dict = {
+      "30s": 30000,
+      "1m": 60000,
+      "5m": 300000,
+      "10m": 600000,
+    };
+    this.autosaveDelay = dict[button.target.innerText];
+    this.save();
   }
 
   export() {

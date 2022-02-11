@@ -2,6 +2,7 @@
 :root {
   --bg: rgba(0, 0, 0, 0);
   --bgh: rgba(0, 0, 0, 0.3);
+  --bga: rgba(255, 255, 255, 0.05);
   --fc: white;
 }
 .noselect {
@@ -53,8 +54,28 @@ body {
     "section1 section3"
     "section2 section4";
 }
+.background {
+  position: absolute;
+  height: 10000px;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  animation: background 7s linear infinite;
+  background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.jpg");
+  background-repeat: repeat;
+  transform: translate3d(0, 0, 0);
+}
+@keyframes background {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 1000px, 0);
+  }
+}
 
 /* section1, money, distance, speed */
+
 .section1 {
   margin: 1.2%;
   background-color: rgba(255, 255, 255, 0.1);
@@ -90,6 +111,7 @@ body {
 }
 
 /* section2, rocket */
+
 .section2 {
   grid-area: section2;
   display: flex;
@@ -116,6 +138,7 @@ body {
 }
 
 /* section3 buttons */
+
 .section3 {
   margin: 1.2%;
   background-color: rgba(255, 255, 255, 0.1);
@@ -136,21 +159,6 @@ body {
   justify-content: center;
   place-items: center;
   text-align: center;
-}
-.shop-button {
-  border-radius: 25px 0 0 25px;
-}
-.story-button {
-  border-radius: 0 25px 25px 0;
-}
-
-.section4 {
-  grid-area: section4;
-  margin: 1.2%;
-  border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-.section3 > h4 {
   background-color: var(--bg);
   color: var(--fc);
   width: 100%;
@@ -160,6 +168,21 @@ body {
 .section3 > h4:hover {
   background-color: var(--bgh);
 }
+.shop-button {
+  border-radius: 25px 0 0 25px;
+}
+.story-button {
+  border-radius: 0 25px 25px 0;
+}
+
+/* section4 shop-area options-area story-area */
+
+.section4 {
+  grid-area: section4;
+  margin: 1.2%;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
 .section4 {
   max-height: 100%;
   overflow: scroll;
@@ -167,8 +190,11 @@ body {
 .section4::-webkit-scrollbar {
   display: none;
 }
+
+/* upgrade page  */
+
 .upgrade:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--bga);
 }
 .upgrade {
   width: 100%;
@@ -190,6 +216,29 @@ body {
   place-items: center;
   font-size: 1.5rem;
 }
+
+/* options page  */
+
+.options-page {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 200px 100px 100px 200px;
+  grid-template-areas:
+    "autosave autosave"
+    "save restart"
+    "import export"
+    "iearea iearea";
+}
+.options-page > h4 {
+  color: var(--fc);
+  display: flex;
+  justify-content: center;
+  place-items: center;
+  transition: 0.5s;
+}
+.options-page > h4:hover {
+  background-color: var(--bgh);
+}
 .save-button {
   grid-area: save;
 }
@@ -198,9 +247,11 @@ body {
 }
 .import-button {
   grid-area: import;
+  background-color: var(--bga);
 }
 .export-button {
   grid-area: export;
+  background-color: var(--bga);
 }
 .import-export-area {
   grid-area: iearea;
@@ -219,48 +270,41 @@ body {
 .import-export-area:focus {
   background-color: var(--bgh);
 }
-.options-page {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 100px 100px 300px;
-  grid-template-areas:
-    "save restart"
-    "import export"
-    "iearea iearea";
+.autosave-title {
+  grid-area: title;
 }
-.options-page > h4 {
-  background-color: var(--bg);
+.autosave {
+  grid-area: autosave;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 50% 50%;
+  gap: 0px 0px;
+  grid-template-areas:
+    "title title title title"
+    ". . . .";
+}
+.autosave > h4 {
   color: var(--fc);
   display: flex;
   justify-content: center;
   place-items: center;
   transition: 0.5s;
 }
-.options-page > h4:hover {
+.autosave > h4:not(:first-of-type) {
+  background-color: var(--bga);
+}
+.autosave > h4:hover {
   background-color: var(--bgh);
 }
+/* story page  */
+
 .story-page {
   padding: 20px;
 }
-.background {
-  position: absolute;
-  height: 10000px;
-  width: 100%;
-  right: 0;
-  bottom: 0;
-  animation: background 7s linear infinite;
-  background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.jpg");
-  background-repeat: repeat;
-  transform: translate3d(0, 0, 0);
-}
-@keyframes background {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 1000px, 0);
-  }
-}
+
+/* mobile stuff  */
+
 @media (orientation: portrait) {
   .container {
     font-size: medium;

@@ -1,4 +1,5 @@
 export default {
+  autosaveDelay: 30000,
   player: {
     stage: 1,
     money: 100,

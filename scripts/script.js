@@ -23,6 +23,7 @@ const restartButton = document.querySelector(".restart-button");
 const importButton = document.querySelector(".import-button");
 const exportButton = document.querySelector(".export-button");
 const container = document.querySelector(".container");
+const autosaveButtons = document.querySelector(".autosave").children;
 
 // Increment the numbers when rocket is clicked
 switch (screen.width < 700) {
@@ -102,6 +103,9 @@ exportButton.addEventListener("click", () => {
 game.tick(1000);
 
 // Autosave
-setInterval(() => {
-  game.save();
-}, 30000);
+for (let i = 1; i < autosaveButtons.length; i++) {
+  autosaveButtons[i].addEventListener("click", (button) => {
+    game.autosaveSetting(button);
+  });
+}
+game.autosave();
