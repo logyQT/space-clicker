@@ -1,22 +1,19 @@
-const rocket = document.getElementsByClassName("rocket-button")[0];
-
-const pages = document.getElementsByClassName("section4")[0].children;
-const pageSwitchButtons = document.getElementsByClassName("section3")[0].children;
-const upgradeButtons = document.getElementsByClassName("upgrades-page")[0].children;
-const saveButton = document.getElementsByClassName("save-button")[0];
-const restartButton = document.getElementsByClassName("restart-button")[0];
-const importButton = document.getElementsByClassName("import-button")[0];
-const exportButton = document.getElementsByClassName("export-button")[0];
-const container = document.querySelector(".container");
-
-const section4 = document.getElementsByClassName("section4")[0];
-const upgradesPage = document.getElementsByClassName("upgrades-page")[0];
-
+import Game from "./Game.js";
 const game = new Game();
+const rocket = document.querySelector(".rocket-button");
+const pages = document.querySelector(".section4").children;
+const pageSwitchButtons = document.querySelector(".section3").children;
+const upgradeButtons = document.querySelector(".upgrades-page").children;
+const saveButton = document.querySelector(".save-button");
+const restartButton = document.querySelector(".restart-button");
+const importButton = document.querySelector(".import-button");
+const exportButton = document.querySelector(".export-button");
+const container = document.querySelector(".container");
 
 // Increment the numbers when rocket is clicked
 switch (screen.width < 700) {
   case true: {
+    container.style.gridTemplateRows = "10% 80% 10% 0%";
     rocket.addEventListener("touchstart", () => {
       game.move();
       container.style.gridTemplateRows = "10% 80% 10% 0%";

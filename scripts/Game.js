@@ -1,16 +1,18 @@
 const Save = window.localStorage;
-class Game {
+import Toast from "./toast.js";
+import defaults from "./defaults.js";
+const toast = new Toast();
+export default class Game {
   constructor() {
     this.buyAmmount = 1;
     this.init();
   }
-
   init() {
     if (Save.getItem("save")) {
       let game = JSON.parse(Save.getItem("game"));
       this.player = game.player;
       this.upgrades = game.upgrades;
-      Toast.show("Save loaded!");
+      toast.show("Save loaded!");
       console.log({ saved: game.timestamp, loaded: Date.now(), diffrence: Date.now() - game.timestamp });
       this.move(10, (Date.now() - game.timestamp) / 1000);
     } else {
@@ -35,10 +37,10 @@ class Game {
         this.player.money -= cost;
         this.upgrade.cost += cost * this.upgrade.penatly;
         this.upgrade.lvl += 1 * this.buyAmmount;
-        Toast.show(`Bought ${this.upgrade.name} x1`);
+        toast.show(`Bought ${this.upgrade.name} x1`);
         break;
       default:
-        Toast.show(`Not enough money to buy ${this.upgrade.name} x${this.buyAmmount}`);
+        toast.show(`Not enough money to buy ${this.upgrade.name} x${this.buyAmmount}`);
         break;
     }
     this.updateDisplay(this.upgrade);
@@ -154,7 +156,7 @@ class Game {
     switch (x != 1) {
       case true: {
         console.log(this.player.speed / this.player.ratio / idle) * x;
-        Toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`, 10000);
+        toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`, 10000);
         break;
       }
       default: {
@@ -171,7 +173,7 @@ class Game {
 
   restart() {
     Save.clear();
-    Toast.show("Let's start from scratch");
+    toast.show("Let's start from scratch");
     this.init();
     console.log("Save cleared!");
   }
@@ -180,7 +182,7 @@ class Game {
     this.timestamp = Date.now();
     Save.setItem("save", true);
     Save.setItem("game", JSON.stringify(this));
-    Toast.show("Saved the game!");
+    toast.show("Saved the game!");
     console.log("Saved the game!");
   }
 
@@ -225,7 +227,7 @@ class Game {
     let game = JSON.parse(atob(txv));
     this.player = game.player;
     this.upgrades = game.upgrades;
-    Toast.show("Save imported!");
+    toast.show("Save imported!");
     this.updateDisplay();
   }
 

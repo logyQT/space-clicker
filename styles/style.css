@@ -273,7 +273,7 @@ body {
     font-size: medium;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 10% 80% 10% 0%;
+    grid-template-rows: 10% 50% 10% 30%;
     grid-template-areas:
       "section1"
       "section2"

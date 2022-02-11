@@ -1,4 +1,4 @@
-const defaults = {
+export default {
   player: {
     stage: 1,
     money: 100,
