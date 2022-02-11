@@ -1,6 +1,6 @@
 .toast {
   position: fixed;
-  bottom: 0%;
+  top: 0%;
   left: 13%;
   margin: auto;
   width: 25%;
@@ -14,10 +14,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.5s, bottom 0.5s, visibility 0.5s;
+  transition: opacity 0.5s, top 0.5s, visibility 0.5s;
 }
 .toast-visible {
-  bottom: 3.5%;
+  top: 11%;
   opacity: 1;
   visibility: visible;
 }
@@ -25,6 +25,6 @@
   .toast {
     left: 0;
     right: 0;
-    width: 50%;
+    width: 65%;
   }
 }
