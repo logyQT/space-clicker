@@ -1,9 +1,23 @@
+// Creating upgrade buttons
+const upgradesList = Object.keys(defaults.upgrades);
+upgradesList.forEach((item) => {
+  let div = document.createElement("div");
+  div.className = `${item} upgrade`;
+  document.querySelector(".shop-page").appendChild(div);
+  for (let i = 0; i < 4; i++) {
+    let p = document.createElement("p");
+    div.appendChild(p);
+  }
+});
+
 import Game from "./Game.js";
+import defaults from "./defaults.js";
 const game = new Game();
+
 const rocket = document.querySelector(".rocket-button");
 const pages = document.querySelector(".section4").children;
 const pageSwitchButtons = document.querySelector(".section3").children;
-const upgradeButtons = document.querySelector(".upgrades-page").children;
+const upgradeButtons = document.querySelector(".shop-page").children;
 const saveButton = document.querySelector(".save-button");
 const restartButton = document.querySelector(".restart-button");
 const importButton = document.querySelector(".import-button");
