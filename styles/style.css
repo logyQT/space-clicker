@@ -4,6 +4,7 @@
   --bgh: rgba(0, 0, 0, 0.3);
   --bga: rgba(255, 255, 255, 0.05);
   --fc: white;
+  --tooltip-money: "Spend it on upgrades";
 }
 .noselect {
   -webkit-touch-callout: none;
@@ -106,9 +107,48 @@ body {
 }
 .money {
   border-radius: 25px 0 0 25px;
+  position: relative;
+}
+.money::before {
+  content: " ";
+  position: absolute;
+  bottom: -5px; /* At the top of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgba(255, 255, 255, 0.1) transparent;
+  visibility: hidden;
+}
+.money::after {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 15px;
+  position: absolute;
+  z-index: 1;
+  content: var(--tooltip-money);
+  width: 120px;
+  top: calc(100% + 5px);
+  left: 50%;
+  margin-left: -60px;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-size: 1rem;
+  pointer-events: none;
+}
+.money:hover::after,
+.money:hover::before {
+  visibility: visible;
+}
+.distance {
+  position: relative;
 }
 .speed {
   border-radius: 0 25px 25px 0;
+  position: relative;
 }
 
 /* section2, rocket */
@@ -128,11 +168,15 @@ body {
   filter: brightness(80%);
 }
 @keyframes rocket {
-  from {
+  0% {
     background-position: -50px;
     background-size: 97%;
   }
-  to {
+  50% {
+    background-position: 0;
+    background-size: 100%;
+  }
+  100% {
     background-position: 50px;
     background-size: 97%;
   }

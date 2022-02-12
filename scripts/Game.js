@@ -211,6 +211,7 @@ export default class Game {
     };
     this.autosaveDelay = dict[button.target.innerText];
     this.save();
+    location.reload();
   }
 
   export() {
