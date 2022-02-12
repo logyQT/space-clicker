@@ -3,7 +3,7 @@ const upgradesList = Object.keys(defaults.upgrades);
 upgradesList.forEach((item) => {
   let div = document.createElement("div");
   div.className = `${item} upgrade`;
-  document.querySelector(".shop-page").appendChild(div);
+  document.querySelector(".upgrade-page").appendChild(div);
   for (let i = 0; i < 4; i++) {
     let p = document.createElement("p");
     div.appendChild(p);
@@ -17,13 +17,14 @@ const game = new Game();
 const rocket = document.querySelector(".rocket-button");
 const pages = document.querySelector(".section4").children;
 const pageSwitchButtons = document.querySelector(".section3").children;
-const upgradeButtons = document.querySelector(".shop-page").children;
+const upgradeButtons = document.querySelector(".upgrade-page").children;
 const saveButton = document.querySelector(".save-button");
 const restartButton = document.querySelector(".restart-button");
 const importButton = document.querySelector(".import-button");
 const exportButton = document.querySelector(".export-button");
 const container = document.querySelector(".container");
 const autosaveButtons = document.querySelector(".autosave").children;
+const buyAmmountButtons = document.querySelector(".ammount-container").children;
 
 // Increment the numbers when rocket is clicked
 switch (screen.width < 700) {
@@ -72,6 +73,13 @@ for (let i = 0; i < pageSwitchButtons.length; i++) {
   });
 }
 
+// Buy ammount buttons
+
+for (let i = 0; i < buyAmmountButtons.length; i++) {
+  buyAmmountButtons[i].addEventListener("click", (button) => {
+    game.changeBuyAmmount(button);
+  });
+}
 // Upgrade buttons
 for (let i = 0; i < upgradeButtons.length; i++) {
   upgradeButtons[i].addEventListener("click", () => {

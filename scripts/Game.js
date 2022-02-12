@@ -14,7 +14,6 @@ export default class Game {
       this.upgrades = game.upgrades;
       this.autosaveDelay = game.autosaveDelay;
       toast.show("Save loaded!");
-      console.log({ saved: game.timestamp, loaded: Date.now(), diffrence: Date.now() - game.timestamp });
       this.move(10, (Date.now() - game.timestamp) / 1000);
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
@@ -22,6 +21,12 @@ export default class Game {
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
     }
+    this.updateDisplay(true);
+  }
+
+  changeBuyAmmount(button) {
+    this.buyAmmount = Number(button.target.innerText.substring(1));
+    console.log(this.buyAmmount);
     this.updateDisplay(true);
   }
 
@@ -136,6 +141,10 @@ export default class Game {
         });
         break;
       default:
+        let cost = upgrade.cost;
+        for (let i = 0; i < this.buyAmmount - 1; i++) {
+          cost += cost * upgrade.penatly;
+        }
         let upgradeElements = document.getElementsByClassName(upgrade.name)[0].children;
         upgradeElements[0].innerText = `${this.capitalize(upgrade.name)}
         x${this.buyAmmount}`;
@@ -143,10 +152,10 @@ export default class Game {
         ${upgrade.lvl}`;
 
         upgradeElements[2].innerText = `Cost
-        ${this.formatMoney(upgrade.cost, 1)}`;
+        ${this.formatMoney(cost, 1)}`;
 
         upgradeElements[3].innerText = `Speed
-        ${this.formatDistance(upgrade.speed, 1)}`;
+        ${this.formatDistance(upgrade.speed * this.buyAmmount, 1)}`;
         break;
     }
   }
@@ -157,7 +166,6 @@ export default class Game {
     this.updateDisplay();
     switch (x != 1) {
       case true: {
-        console.log(this.player.speed / this.player.ratio / idle) * x;
         toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`, 10000);
         break;
       }
@@ -189,7 +197,6 @@ export default class Game {
   }
 
   autosave() {
-    console.log(this.autosaveDelay);
     setInterval(() => {
       this.save();
     }, this.autosaveDelay);
