@@ -16,11 +16,7 @@ export default class Game {
       this.upgrades = game.upgrades;
       this.autosaveDelay = game.autosaveDelay;
       toast.show("Save loaded!");
-      this.move(10, (Date.now() - game.timestamp) / 1000);
-      toast.show(
-        `Offline earnings: ${this.formatMoney(((this.player.speed / this.player.ratio / 10) * (Date.now() - game.timestamp)) / 1000, 1)}`,
-        10000
-      );
+      this.offlineProgress((Date.now() - game.timestamp) / 1000);
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
       this.autosaveDelay = defaults.autosaveDelay;
@@ -175,6 +171,7 @@ export default class Game {
   offlineProgress(awayTime) {
     this.player.distance += (this.player.speed / this.player.afkRatio) * awayTime * this.player.bonus;
     this.player.money += (this.player.speed / this.player.ratio / this.player.afkRatio) * awayTime * this.player.bonus;
+    toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / this.player.afkRatio) * awayTime, 1)}`, 10000);
     this.updateDisplay();
   }
 
@@ -190,7 +187,7 @@ export default class Game {
     Save.clear();
     toast.show("Let's start from scratch");
     this.init();
-    console.log("Save cleared!");
+    location.reload();
   }
 
   save() {
