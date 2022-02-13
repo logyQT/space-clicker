@@ -4,9 +4,9 @@
   --bgh: rgba(0, 0, 0, 0.3);
   --bga: rgba(255, 255, 255, 0.05);
   --fc: white;
-  --tooltip-money: "Main currency in the game. Spend it on upgrades";
-  --tooltip-distance: "The distance that you have gone so far";
-  --tooltip-speed: "The speed that you're going at";
+  --tooltip-money: "Main currency in the game.";
+  --tooltip-distance: "The distance that you have gone so far.";
+  --tooltip-speed: "The speed that you're going at.";
 }
 .noselect {
   -webkit-touch-callout: none;
@@ -128,7 +128,7 @@ body {
   background-color: black;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px;
   border-radius: 15px;
   position: absolute;
   z-index: 1;
@@ -165,7 +165,7 @@ body {
   background-color: black;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px;
   border-radius: 15px;
   position: absolute;
   z-index: 1;
@@ -179,7 +179,7 @@ body {
   pointer-events: none;
 }
 .distance:hover::after,
-.money:hover::before {
+.distance:hover::before {
   visibility: visible;
 }
 .speed {
@@ -203,7 +203,7 @@ body {
   background-color: black;
   color: #fff;
   text-align: center;
-  padding: 5px 0;
+  padding: 5px;
   border-radius: 15px;
   position: absolute;
   z-index: 1;
@@ -232,8 +232,8 @@ body {
 .rocket-button {
   width: 100%;
   height: 100%;
-  background: center no-repeat url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_spaceship_low_res.png");
-  /* background: center no-repeat url("../images/test.gif"); */
+  /* background: center no-repeat url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_spaceship_low_res.png"); */
+  background: center no-repeat url("../images/spaceship_default.gif");
   background-size: cover;
   animation: rocket 1.5s linear 0s infinite alternate;
   filter: brightness(80%);

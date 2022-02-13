@@ -15,6 +15,7 @@
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s, top 0.5s, visibility 0.5s;
+  pointer-events: none;
 }
 .toast-visible {
   top: 11%;
