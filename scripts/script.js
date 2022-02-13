@@ -1,3 +1,6 @@
+import Game from "./Game.js";
+import defaults from "./defaults.js";
+
 // Creating upgrade buttons
 const upgradesList = Object.keys(defaults.upgrades);
 upgradesList.forEach((item) => {
@@ -10,8 +13,6 @@ upgradesList.forEach((item) => {
   }
 });
 
-import Game from "./Game.js";
-import defaults from "./defaults.js";
 const game = new Game();
 
 const rocket = document.querySelector(".rocket-button");
@@ -25,6 +26,13 @@ const exportButton = document.querySelector(".export-button");
 const container = document.querySelector(".container");
 const autosaveButtons = document.querySelector(".autosave").children;
 const buyAmmountButtons = document.querySelector(".ammount-container").children;
+const section3 = document.querySelector(".section3");
+
+// section3 horizontal scrolling
+section3.addEventListener("wheel", (evt) => {
+  evt.preventDefault();
+  section3.scrollLeft += evt.deltaY / 2.5;
+});
 
 // Increment the numbers when rocket is clicked
 switch (screen.width < 700) {
@@ -74,12 +82,12 @@ for (let i = 0; i < pageSwitchButtons.length; i++) {
 }
 
 // Buy ammount buttons
-
 for (let i = 0; i < buyAmmountButtons.length; i++) {
   buyAmmountButtons[i].addEventListener("click", (button) => {
     game.changeBuyAmmount(button);
   });
 }
+
 // Upgrade buttons
 for (let i = 0; i < upgradeButtons.length; i++) {
   upgradeButtons[i].addEventListener("click", () => {
@@ -107,13 +115,9 @@ exportButton.addEventListener("click", () => {
   game.export();
 });
 
-// Game loop
-game.tick(1000);
-
-// Autosave
+// Autosave settings buttons
 for (let i = 1; i < autosaveButtons.length; i++) {
   autosaveButtons[i].addEventListener("click", (button) => {
     game.autosaveSetting(button);
   });
 }
-game.autosave();

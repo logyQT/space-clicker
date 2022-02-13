@@ -6,6 +6,8 @@ export default class Game {
   constructor() {
     this.buyAmmount = 1;
     this.init();
+    this.tick();
+    this.autosave();
   }
   init() {
     if (Save.getItem("save")) {
@@ -15,6 +17,10 @@ export default class Game {
       this.autosaveDelay = game.autosaveDelay;
       toast.show("Save loaded!");
       this.move(10, (Date.now() - game.timestamp) / 1000);
+      toast.show(
+        `Offline earnings: ${this.formatMoney(((this.player.speed / this.player.ratio / 10) * (Date.now() - game.timestamp)) / 1000, 1)}`,
+        10000
+      );
     } else {
       console.log("Could not find a valid save file! \nSetting initial values!");
       this.autosaveDelay = defaults.autosaveDelay;
@@ -160,25 +166,24 @@ export default class Game {
     }
   }
 
-  move(idle = 1, x = 1) {
-    this.player.distance += (this.player.speed / idle) * x;
-    this.player.money += (this.player.speed / this.player.ratio / idle) * x;
+  move() {
+    this.player.distance += this.player.speed * this.player.bonus;
+    this.player.money += (this.player.speed / this.player.ratio) * this.player.bonus;
     this.updateDisplay();
-    switch (x != 1) {
-      case true: {
-        toast.show(`Offline earnings: ${this.formatMoney((this.player.speed / this.player.ratio / idle) * x, 1)}`, 10000);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
   }
 
-  tick(t) {
+  offlineProgress(awayTime) {
+    this.player.distance += (this.player.speed / this.player.afkRatio) * awayTime * this.player.bonus;
+    this.player.money += (this.player.speed / this.player.ratio / this.player.afkRatio) * awayTime * this.player.bonus;
+    this.updateDisplay();
+  }
+
+  tick() {
     setInterval(() => {
-      this.move(10, 1);
-    }, t);
+      this.player.distance += (this.player.speed / this.player.afkRatio) * this.player.bonus;
+      this.player.money += (this.player.speed / this.player.ratio / this.player.afkRatio) * this.player.bonus;
+      this.updateDisplay();
+    }, this.player.tickSpeed);
   }
 
   restart() {

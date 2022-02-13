@@ -6,6 +6,9 @@ export default {
     ratio: 10,
     distance: 0,
     speed: 0,
+    afkRatio: 10,
+    bonus: 1,
+    tickSpeed: 1000,
   },
   upgrades: {
     fuel: {
