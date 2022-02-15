@@ -10,9 +10,6 @@
 }
 .noselect {
   -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .hidden {
@@ -38,7 +35,7 @@ body {
   justify-content: center;
   place-items: center;
   background: #000;
-  font-family: Avant;
+  font-family: Avant, sans-serif;
   overflow: hidden;
 }
 .container {
@@ -120,8 +117,6 @@ body {
 }
 .money::after {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
   color: #fff;
   text-align: center;
   padding: 5px;
@@ -157,8 +152,6 @@ body {
 }
 .distance::after {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
   color: #fff;
   text-align: center;
   padding: 5px;
@@ -195,8 +188,6 @@ body {
 }
 .speed::after {
   visibility: hidden;
-  width: 120px;
-  background-color: black;
   color: #fff;
   text-align: center;
   padding: 5px;
