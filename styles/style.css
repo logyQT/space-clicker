@@ -51,6 +51,7 @@ body {
   grid-template:
     "section1 section3" 10%
     "section2 section4" 90% / 50% 50%;
+  transition: all 0.5s;
 }
 .background {
   position: absolute;
@@ -59,8 +60,7 @@ body {
   right: 0;
   bottom: 0;
   animation: background 7s linear infinite;
-  background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.jpg");
-  /* background-image: url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background.jpg"); */
+  background-image: url("../images/galaxy.jpg");
   background-repeat: repeat;
   transform: translate3d(0, 0, 0);
 }
@@ -219,8 +219,7 @@ body {
 .rocket-button {
   width: 100%;
   height: 100%;
-  /* background: center no-repeat url("https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_spaceship_low_res.png"); */
-  background: center no-repeat url("../images/spaceship_default.gif");
+  background: center no-repeat url("../images/default_rocket.png");
   background-size: cover;
   animation: rocket 1.5s linear 0s infinite alternate;
   filter: brightness(80%);
@@ -250,7 +249,7 @@ body {
   grid-area: section3;
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 33.3334%;
+  grid-auto-columns: 33.33%;
   grid-template-rows: 100%;
   gap: 0 0;
   justify-content: start;
@@ -296,7 +295,7 @@ body {
   height: 100%;
   list-style-type: none;
   display: grid;
-  grid-template: ". . . . . ." 100%;
+  grid-template: ". . . . . ." 100% / 1fr 1fr 1fr 1fr 1fr 1fr;
   background-color: var(--bga);
   border-radius: 25px 25px 0 0;
 }
@@ -434,10 +433,65 @@ body {
 .autosave > h4:hover {
   background-color: var(--bgh);
 }
+
 /* story page  */
 
 .story-page {
   padding: 20px;
+}
+
+/* skins page */
+
+.skins-page {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas: ". . .";
+  grid-auto-rows: 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: row;
+  gap: 0 0;
+  border-radius: 25px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.skins-page::-webkit-scrollbar {
+  display: none;
+}
+.skin-card {
+  display: grid;
+  justify-content: center;
+  place-items: end;
+  padding: 5px;
+  transition: all 0.3s;
+  aspect-ratio: 1;
+  background: center no-repeat;
+  background-size: 101%;
+}
+.skin-card:hover {
+  background-size: 106%;
+}
+.skin-card:hover:not(.selected-skin) {
+  background-color: var(--bgh);
+}
+.selected-skin {
+  background-color: rgba(40, 220, 90, 0.5);
+}
+.locked {
+  position: relative;
+}
+.locked::after {
+  content: "LOCKED";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
 }
 
 /* mobile stuff  */
