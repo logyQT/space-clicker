@@ -31,7 +31,11 @@ const section3 = document.querySelector(".section3");
 // section3 horizontal scrolling
 section3.addEventListener("wheel", (evt) => {
   evt.preventDefault();
-  section3.scrollLeft += evt.deltaY / 2.5;
+  section3.scrollBy({
+    top: 0,
+    left: evt.deltaY * 100,
+    behavior: "smooth",
+  });
 });
 
 // Increment the numbers when rocket is clicked
