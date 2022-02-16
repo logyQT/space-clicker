@@ -9,7 +9,7 @@
   "background_color": "#000000",
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/icon_spaceship.png",
+      "src": "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/icon.png",
       "type": "image/png",
       "size": "512x512"
     }

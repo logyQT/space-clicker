@@ -1,6 +1,8 @@
 const Save = window.localStorage;
 import Toast from "./toast.js";
 import defaults from "./defaults.js";
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 const toast = new Toast();
 export default class Game {
   constructor() {
@@ -12,9 +14,10 @@ export default class Game {
   init() {
     if (Save.getItem("save")) {
       let game = JSON.parse(Save.getItem("game"));
-      this.player = { ...defaults.player, ...game.player };
-      this.upgrades = { ...defaults.upgrades, ...game.upgrades };
+      this.player = game.player;
+      this.upgrades = game.upgrades;
       this.autosaveDelay = game.autosaveDelay;
+      this.skins = game.skins;
       toast.show("Save loaded!");
       this.offlineProgress((Date.now() - game.timestamp) / 1000);
     } else {
@@ -22,37 +25,102 @@ export default class Game {
       this.autosaveDelay = defaults.autosaveDelay;
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
+      this.skins = defaults.skins;
     }
     this.updateDisplay(true);
+    this.checkSkins();
+  }
+
+  checkSkins() {
+    Object.keys(this.skins).forEach((s) => {
+      switch (this.skins[s].unlocked) {
+        case true: {
+          switch (this.skins[s].selected) {
+            case true: {
+              document.querySelector(`.${this.skins[s].name}`).classList.add("selected-skin");
+            }
+            case false: {
+              break;
+            }
+          }
+          break;
+        }
+        case false: {
+          document.querySelector(`.${this.skins[s].name}`).classList.add("locked");
+          break;
+        }
+      }
+    });
+  }
+
+  selectSkin(b) {
+    let skin = b.target.className.split(" ")[0];
+    switch (this.skins[skin].unlocked) {
+      case true: {
+        Object.keys(this.skins).forEach((s) => {
+          switch (this.skins[s].type == this.skins[skin].type) {
+            case true: {
+              $(`.${this.skins[s].name}`).classList.remove("selected-skin");
+              break;
+            }
+            case false: {
+              break;
+            }
+          }
+        });
+        $(`.${skin}`).classList.add("selected-skin");
+        switch (this.skins[skin].type == "rocket") {
+          case true: {
+            $(".rocket-button").style.backgroundImage = `url(${this.skins[skin].url})`;
+            break;
+          }
+          case false: {
+            $(".background").style.backgroundImage = `url(${this.skins[skin].url})`;
+            break;
+          }
+        }
+        break;
+      }
+      case false: {
+        toast.show("You have not unlocked this skin!");
+        break;
+      }
+    }
   }
 
   changeBuyAmmount(button) {
     this.buyAmmount = Number(button.target.innerText.substring(1));
-    console.log(this.buyAmmount);
     this.updateDisplay(true);
   }
 
   buyUpgrade(button) {
     let buttonID = button.className;
     let upgradeID = buttonID.split(" ")[0];
-    this.upgrade = this.upgrades[upgradeID];
-    let cost = this.upgrade.cost;
-    for (let i = 0; i < this.buyAmmount - 1; i++) {
-      cost += cost * this.upgrade.penatly;
-    }
+    let upgrade = this.upgrades[upgradeID];
+    let cost = this.calcCost(upgrade);
     switch (this.player.money >= cost) {
       case true:
-        this.player.speed += this.upgrade.speed * this.buyAmmount;
+        this.player.speed += upgrade.speed * this.buyAmmount;
         this.player.money -= cost;
-        this.upgrade.cost += cost * this.upgrade.penatly;
-        this.upgrade.lvl += 1 * this.buyAmmount;
-        toast.show(`Bought ${this.upgrade.name} x1`);
+        upgrade.cost += cost * upgrade.penatly;
+        upgrade.lvl += 1 * this.buyAmmount;
+        toast.show(`Bought ${upgrade.name} x1`);
         break;
       default:
-        toast.show(`Not enough money to buy ${this.upgrade.name} x${this.buyAmmount}`);
+        toast.show(`Not enough money to buy ${upgrade.name} x${this.buyAmmount}`);
         break;
     }
-    this.updateDisplay(this.upgrade);
+    this.updateDisplay(upgrade);
+  }
+
+  calcCost(upgrade) {
+    let total_cost = upgrade.cost;
+    let cost = upgrade.cost;
+    for (let i = 0; i < this.buyAmmount - 1; i++) {
+      cost += cost * upgrade.penatly;
+      total_cost += cost;
+    }
+    return total_cost;
   }
 
   formatDisplay(num, digits, type = false) {
@@ -145,10 +213,7 @@ export default class Game {
         });
         break;
       default:
-        let cost = upgrade.cost;
-        for (let i = 0; i < this.buyAmmount - 1; i++) {
-          cost += cost * upgrade.penatly;
-        }
+        let cost = this.calcCost(upgrade);
         let upgradeElements = document.getElementsByClassName(upgrade.name)[0].children;
         upgradeElements[0].innerText = `${this.capitalize(upgrade.name)}
         x${this.buyAmmount}`;
@@ -273,8 +338,6 @@ export default class Game {
     let defaultPlayerProperties = Object.keys(defaults.player);
     let missingPlayerProperties = defaultPlayerProperties.filter((item) => !savedPlayerProperties.includes(item));
     let removedPlayerProperties = savedPlayerProperties.filter((item) => !defaultPlayerProperties.includes(item));
-
-    console.log(missingUpgrades, removedUpgrades, missingPlayerProperties, removedPlayerProperties);
 
     if (missingUpgrades && removedUpgrades && savedPlayerProperties && removedPlayerProperties) {
       return true;

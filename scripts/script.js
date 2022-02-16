@@ -1,5 +1,7 @@
 import Game from "./Game.js";
 import defaults from "./defaults.js";
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 
 // Creating upgrade buttons
 const upgradesList = Object.keys(defaults.upgrades);
@@ -14,60 +16,32 @@ upgradesList.forEach((item) => {
 });
 
 // Creating skin buttons
-const rocketSkins = Object.keys(defaults.skins.rocket);
-rocketSkins.forEach((skin) => {
+const skinList = Object.keys(defaults.skins);
+skinList.forEach((skin) => {
   let div = document.createElement("div");
   let p = document.createElement("p");
-  p.innerText = `${defaults.skins.rocket[skin].name}`;
+  p.innerText = `${defaults.skins[skin].displayName}`;
   div.appendChild(p);
-  switch (defaults.skins.rocket[skin].unlocked) {
-    case true: {
-      div.className = "skin-card";
-      break;
-    }
-    case false: {
-      div.className = "skin-card locked";
-      break;
-    }
-  }
-  div.style.backgroundImage = `url(${defaults.skins.rocket[skin].icon_url})`;
-  document.querySelector(".skins-page").appendChild(div);
-});
-const backgroundSkins = Object.keys(defaults.skins.background);
-backgroundSkins.forEach((skin) => {
-  let div = document.createElement("div");
-  let p = document.createElement("p");
-  p.innerText = `${defaults.skins.background[skin].name}`;
-  div.appendChild(p);
-  switch (defaults.skins.rocket[skin].unlocked) {
-    case true: {
-      div.className = "skin-card";
-      break;
-    }
-    case false: {
-      div.className = "skin-card locked";
-      break;
-    }
-  }
-  div.style.backgroundImage = `url(${defaults.skins.background[skin].icon_url})`;
+  div.className = `${defaults.skins[skin].name} skin-card`;
+  div.style.backgroundImage = `url(${defaults.skins[skin].icon_url})`;
   document.querySelector(".skins-page").appendChild(div);
 });
 
 const game = new Game();
 
-const rocket = document.querySelector(".rocket-button");
-const pages = document.querySelector(".section4").children;
-const pageSwitchButtons = document.querySelector(".section3").children;
-const upgradeButtons = document.querySelector(".upgrade-page").children;
-const saveButton = document.querySelector(".save-button");
-const restartButton = document.querySelector(".restart-button");
-const importButton = document.querySelector(".import-button");
-const exportButton = document.querySelector(".export-button");
-const container = document.querySelector(".container");
-const autosaveButtons = document.querySelector(".autosave").children;
-const buyAmmountButtons = document.querySelector(".ammount-container").children;
-const section3 = document.querySelector(".section3");
-const skinButtons = document.querySelectorAll(".skin-card");
+const rocket = $(".rocket-button");
+const pages = $(".section4").children;
+const pageSwitchButtons = $(".section3").children;
+const upgradeButtons = $(".upgrade-page").children;
+const saveButton = $(".save-button");
+const restartButton = $(".restart-button");
+const importButton = $(".import-button");
+const exportButton = $(".export-button");
+const container = $(".container");
+const autosaveButtons = $(".autosave").children;
+const buyAmmountButtons = $(".ammount-container").children;
+const section3 = $(".section3");
+const skinButtons = $$(".skin-card");
 
 // section3 horizontal scrolling
 section3.addEventListener("wheel", (evt) => {
@@ -81,7 +55,7 @@ section3.addEventListener("wheel", (evt) => {
 
 skinButtons.forEach((b) => {
   b.addEventListener("click", (b) => {
-    console.log(b.target);
+    game.selectSkin(b);
   });
 });
 
