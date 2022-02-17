@@ -86,13 +86,12 @@ div {
   display: grid;
   grid-auto-flow: column;
   gap: 0 0;
-  grid-template: ". . ." 100% / 33% 33% 33%;
+  grid-template: ". . ." 100% / 1fr 1fr 1fr;
   justify-content: center;
   place-items: center;
 }
 .section1 > h4 {
-  display: flex;
-  justify-content: center;
+  display: grid;
   place-items: center;
   text-align: center;
   font-size: 1.5rem;
@@ -215,9 +214,8 @@ div {
 
 .section2 {
   grid-area: section2;
-  display: flex;
+  display: grid;
   place-items: center;
-  place-content: center;
 }
 .rocket-button {
   width: 100%;
@@ -264,8 +262,7 @@ div {
 }
 .section3 > h4 {
   font-size: 1.5rem;
-  display: flex;
-  justify-content: center;
+  display: grid;
   place-items: center;
   text-align: center;
   background-color: var(--bg);
@@ -273,6 +270,9 @@ div {
   width: 100%;
   height: 100%;
   transition: 0.5s;
+}
+.section3 > h4:nth-child(2n) {
+  background-color: var(--bga);
 }
 .section3 > h4:hover {
   background-color: var(--bgh);
@@ -305,8 +305,7 @@ div {
 .buy-ammount > ul > li {
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
   place-items: center;
   transition: 0.5s;
 }
@@ -348,9 +347,8 @@ div {
 }
 .upgrade > p {
   padding: 6px;
-  display: flex;
+  display: grid;
   text-align: center;
-  justify-content: center;
   place-items: center;
   font-size: 1.5rem;
 }
@@ -372,8 +370,7 @@ div {
 }
 .options-page > h4 {
   color: var(--fc);
-  display: flex;
-  justify-content: center;
+  display: grid;
   place-items: center;
   transition: 0.5s;
 }
@@ -425,8 +422,7 @@ div {
 }
 .autosave > h4 {
   color: var(--fc);
-  display: flex;
-  justify-content: center;
+  display: grid;
   place-items: center;
   transition: 0.5s;
 }
@@ -498,7 +494,7 @@ div {
 
 @media (orientation: portrait) {
   .container {
-    font-size: medium;
+    font-size: 1rem;
     display: grid;
     grid-template:
       "section1" 10%

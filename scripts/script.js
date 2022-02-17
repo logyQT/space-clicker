@@ -8,7 +8,7 @@ const upgradesList = Object.keys(defaults.upgrades);
 upgradesList.forEach((item) => {
   let div = document.createElement("div");
   div.className = `${item} upgrade`;
-  document.querySelector(".upgrade-page").appendChild(div);
+  $(".upgrade-page").appendChild(div);
   for (let i = 0; i < 4; i++) {
     let p = document.createElement("p");
     div.appendChild(p);
@@ -24,7 +24,7 @@ skinList.forEach((skin) => {
   div.appendChild(p);
   div.className = `${defaults.skins[skin].name} skin-card`;
   div.style.backgroundImage = `url(${defaults.skins[skin].icon_url})`;
-  document.querySelector(".skins-page").appendChild(div);
+  $(".skins-page").appendChild(div);
 });
 
 const game = new Game();

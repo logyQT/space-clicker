@@ -37,7 +37,7 @@ export default class Game {
         case true: {
           switch (this.skins[s].selected) {
             case true: {
-              document.querySelector(`.${this.skins[s].name}`).classList.add("selected-skin");
+              $(`.${this.skins[s].name}`).classList.add("selected-skin");
             }
             case false: {
               break;
@@ -46,7 +46,7 @@ export default class Game {
           break;
         }
         case false: {
-          document.querySelector(`.${this.skins[s].name}`).classList.add("locked");
+          $(`.${this.skins[s].name}`).classList.add("locked");
           break;
         }
       }
@@ -193,7 +193,7 @@ export default class Game {
   }
 
   updateDisplay(upgrade = false) {
-    let displayElements = document.getElementsByClassName("section1")[0].children;
+    let displayElements = $(".section1").children;
 
     displayElements[0].innerText = `Money 
     ${this.formatDisplay(this.player.money, 1, true)}`;
@@ -214,7 +214,7 @@ export default class Game {
         break;
       default:
         let cost = this.calcCost(upgrade);
-        let upgradeElements = document.getElementsByClassName(upgrade.name)[0].children;
+        let upgradeElements = $(`.${upgrade.name}`).children;
         upgradeElements[0].innerText = `${this.capitalize(upgrade.name)}
         x${this.buyAmmount}`;
         upgradeElements[1].innerText = `Level 
