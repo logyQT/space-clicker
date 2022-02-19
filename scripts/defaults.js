@@ -86,8 +86,8 @@ export default {
     default_rocket: {
       name: "default_rocket",
       displayName: "Default",
-      url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_rocket.png",
-      icon_url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_rocket_icon.png",
+      url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_rocket.webp",
+      icon_url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/default_rocket_icon.webp",
       unlocked: true,
       selected: true,
       type: "rocket",
@@ -167,8 +167,8 @@ export default {
     default_background: {
       name: "default_background",
       displayName: "Default",
-      url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.jpg",
-      icon_url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.jpg",
+      url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.webp",
+      icon_url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/galaxy.webp",
       unlocked: true,
       selected: true,
       type: "background",
