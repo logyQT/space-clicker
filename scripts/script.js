@@ -28,7 +28,6 @@ skinList.forEach((skin) => {
 });
 
 const game = new Game();
-
 const rocket = $(".rocket-button");
 const pages = $(".section4").children;
 const pageSwitchButtons = $(".section3").children;
