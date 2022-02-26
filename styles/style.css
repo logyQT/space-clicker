@@ -3,7 +3,7 @@
 :root {
   --bg: rgba(0, 0, 0, 0);
   --bgh: rgba(0, 0, 0, 0.3);
-  --bga: rgba(255, 255, 255, 0.05);
+  --bga: #ffffff09;
   --fc: white;
   --tooltip-money: "Main currency in the game.";
   --tooltip-distance: "The distance that you have gone so far.";

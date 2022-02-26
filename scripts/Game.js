@@ -238,7 +238,7 @@ export default class Game {
   offlineProgress(awayTime) {
     this.player.distance += (this.player.speed / this.player.afkRatio) * awayTime * this.player.bonus;
     this.player.money += (this.player.speed / this.player.ratio / this.player.afkRatio) * awayTime * this.player.bonus;
-    toast.show(`Offline earnings: ${this.formatDisplay((this.player.speed / this.player.ratio / this.player.afkRatio) * awayTime, 1, true)}`, 10000);
+    toast.show(`Offline earnings: ${this.formatDisplay((this.player.speed / this.player.ratio / this.player.afkRatio) * awayTime, 1, true)}`, 100000);
     this.updateDisplay();
   }
 
