@@ -2,8 +2,14 @@
 <html lang="en">
   <head>
     <style>
-      body {
-        overflow: hidden;
+      .background {
+        display: none;
+      }
+      .container {
+        display: none;
+      }
+      .loader-wrapper {
+        display: none;
       }
       ::-webkit-scrollbar {
         display: none;
@@ -69,9 +75,10 @@
         top: 0;
         left: 0;
         background-color: #222;
-        display: grid;
         place-items: center;
         color: white;
+        display: grid;
+        transition: opacity 1500ms ease;
       }
       @keyframes loader {
         0% {
@@ -125,9 +132,12 @@
     <script type="module" src="scripts/script.js" defer></script>
   </head>
 
-  <body class="noselect">
+  <body class="noselect" style="overflow: hidden">
     <noscript>
       <style>
+        .loader-wrapper {
+          display: none;
+        }
         .background {
           display: none;
         }
@@ -205,7 +215,7 @@
         </div>
       </div>
     </div>
-    <div class="loader-wrapper">
+    <div class="loader-wrapper" style="overflow: hidden">
       <p class="glitch">
         <span>Space Clicker</span>
         <span>Space Clicker</span>
@@ -215,8 +225,12 @@
     <script>
       window.addEventListener("load", () => {
         setTimeout(() => {
-          document.querySelector(".loader-wrapper").style.display = "none";
+          document.querySelector(".loader-wrapper").style.opacity = 0;
+          setTimeout(() => {
+            document.querySelector(".loader-wrapper").style.display = "none";
+          }, 1500);
           document.querySelector(".toast").style.display = "block";
+          document.querySelector(".background").style.display = "block";
         }, 1000);
       });
     </script>
