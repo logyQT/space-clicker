@@ -178,7 +178,7 @@ export default {
       displayName: "Generic",
       url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background.jpg",
       icon_url: "https://raw.githubusercontent.com/logyQT/space-clicker/main/images/background.jpg",
-      unlocked: false,
+      unlocked: true,
       selected: false,
       type: "background",
     },

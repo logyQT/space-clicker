@@ -54,7 +54,7 @@ section3.addEventListener("wheel", (evt) => {
 
 skinButtons.forEach((b) => {
   b.addEventListener("click", (b) => {
-    game.selectSkin(b);
+    game.selectSkin(b.target.className.split(" ")[0]);
   });
 });
 

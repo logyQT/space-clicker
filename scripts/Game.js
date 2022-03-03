@@ -38,6 +38,7 @@ export default class Game {
           switch (this.skins[s].selected) {
             case true: {
               $(`.${this.skins[s].name}`).classList.add("selected-skin");
+              this.selectSkin(this.skins[s].name);
             }
             case false: {
               break;
@@ -53,13 +54,13 @@ export default class Game {
     });
   }
 
-  selectSkin(b) {
-    let skin = b.target.className.split(" ")[0];
+  selectSkin(skin) {
     switch (this.skins[skin].unlocked) {
       case true: {
         Object.keys(this.skins).forEach((s) => {
           switch (this.skins[s].type == this.skins[skin].type) {
             case true: {
+              this.skins[s].selected = false;
               $(`.${this.skins[s].name}`).classList.remove("selected-skin");
               break;
             }
@@ -67,6 +68,7 @@ export default class Game {
               break;
             }
           }
+          this.skins[skin].selected = true;
         });
         $(`.${skin}`).classList.add("selected-skin");
         switch (this.skins[skin].type == "rocket") {

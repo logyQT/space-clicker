@@ -469,6 +469,9 @@ div {
   background: center no-repeat;
   background-size: 101%;
 }
+.skin-card > p {
+  pointer-events: none;
+}
 .skin-card:hover {
   background-size: 106%;
 }
