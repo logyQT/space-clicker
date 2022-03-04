@@ -88,6 +88,7 @@ export default class Game {
         break;
       }
     }
+    this.save();
   }
 
   changeBuyAmmount(button) {
