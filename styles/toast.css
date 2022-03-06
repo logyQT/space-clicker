@@ -5,13 +5,13 @@
   margin: auto;
   width: 25%;
   padding: 6px;
-  background: #cccccc;
-  color: #333333;
+  background: #ffffff1f;
+  color: #fff;
   font-family: sans-serif;
   text-align: center;
   border: 1px solid #aaaaaa;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.5s, top 0.5s, visibility 0.5s;
@@ -21,6 +21,7 @@
   top: 11%;
   opacity: 1;
   visibility: visible;
+  white-space: pre-line;
 }
 @media (orientation: portrait) {
   .toast {
