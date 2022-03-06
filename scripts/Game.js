@@ -14,10 +14,15 @@ export default class Game {
   init() {
     if (Save.getItem("save")) {
       let game = JSON.parse(Save.getItem("game"));
+      if (game.ver != defaults.ver) {
+        this.restart();
+        return;
+      }
       this.player = game.player;
       this.upgrades = game.upgrades;
       this.autosaveDelay = game.autosaveDelay;
       this.skins = game.skins;
+      this.ver = game.ver;
       toast.show("Save loaded!");
       this.offlineProgress(Date.now() - game.timestamp);
     } else {
@@ -26,6 +31,7 @@ export default class Game {
       this.player = defaults.player;
       this.upgrades = defaults.upgrades;
       this.skins = defaults.skins;
+      this.ver = defaults.ver;
     }
     this.updateDisplay(true);
     this.checkSkins();

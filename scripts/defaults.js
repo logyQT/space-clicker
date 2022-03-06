@@ -1,4 +1,5 @@
 export default {
+  ver: "0.01",
   autosaveDelay: 30000,
   player: {
     stage: 1,
