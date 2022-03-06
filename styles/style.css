@@ -223,23 +223,22 @@ div {
   width: 100%;
   height: 100%;
   background: center no-repeat url("../images/default_rocket.webp");
-  background-size: cover;
+  background-size: contain;
   animation: rocket 1.5s linear 0s infinite alternate;
   filter: brightness(80%);
   transform: translate3d(0, 0, 0);
+  pointer-events: none;
+  z-index: 11;
 }
 @keyframes rocket {
   0% {
-    background-position: -50px;
-    background-size: 97%;
+    transform: translate3d(-5%, 3%, 0);
   }
   50% {
-    background-position: 0;
-    background-size: 100%;
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    background-position: 50px;
-    background-size: 97%;
+    transform: translate3d(5%, 3%, 0);
   }
 }
 
@@ -493,6 +492,38 @@ div {
   display: grid;
   place-items: center;
   overflow: hidden;
+}
+
+/* cases */
+
+.cases-page {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-areas: ". . .";
+  grid-auto-rows: 1fr;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: row;
+  gap: 0 0;
+}
+.cosmic {
+  background: url("../images/skrzynka.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.case-card {
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  place-items: end;
+  padding: 5px;
+  transition: 1s;
+}
+.case-card:hover {
+  background-color: var(--bgh);
+}
+.case-card > p {
+  pointer-events: none;
 }
 
 /* mobile stuff  */

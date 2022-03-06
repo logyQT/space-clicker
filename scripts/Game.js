@@ -38,7 +38,7 @@ export default class Game {
           switch (this.skins[s].selected) {
             case true: {
               $(`.${this.skins[s].name}`).classList.add("selected-skin");
-              this.selectSkin(this.skins[s].name);
+              this.selectSkin(this.skins[s].name, true);
             }
             case false: {
               break;
@@ -54,7 +54,7 @@ export default class Game {
     });
   }
 
-  selectSkin(skin) {
+  selectSkin(skin, firstLoad = false) {
     switch (this.skins[skin].unlocked) {
       case true: {
         Object.keys(this.skins).forEach((s) => {
@@ -88,7 +88,9 @@ export default class Game {
         break;
       }
     }
-    this.save();
+    if (!firstLoad) {
+      this.save();
+    }
   }
 
   changeBuyAmmount(button) {
@@ -311,7 +313,12 @@ export default class Game {
         return false;
       }
     }
+
     let txv = document.getElementsByClassName("import-export-area")[0].value;
+
+    if (txv == "doublemymoney") {
+      this.player.money *= 2;
+    }
 
     if (!__atob(txv)) {
       return false;
